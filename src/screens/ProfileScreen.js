@@ -4,21 +4,6 @@ import { Text, Card, Button, Avatar, Header } from "react-native-elements";
 import { AuthContext } from "../providers/AuthProvider";
 const ProfileScreen = (props) => {
   const [Profile, setProfile] = useState({});
-
-  // const loadProfile = async (email) => {
-  //   const response = await getDataJSON(email);
-  //   if (response.ok) {
-  //     setProfile(response.data);
-  //   }
-  //   setLoading(false);
-  // };
-
-  // useEffect(() => {
-  //   loadProfile();
-  // }, []);
-
-  
-
   return (
     <AuthContext.Consumer>
       {(auth) => (
@@ -53,9 +38,17 @@ const ProfileScreen = (props) => {
           showAccessory
           accessory={{ containerStyle: { backgroundColor: "#1C1C1C" } }}
         />
-
         <Text style={styles.textStyle}>Name :{auth.CurrentUser.name}</Text>
-        <Text style={styles.textStyle}>Email :{auth.CurrentUser.email}</Text>
+        <Text style={styles.textStyle}>Born On :{auth.CurrentUser.BornOn}</Text>
+        <Text style={styles.textStyle}>Address :{auth.CurrentUser.address}</Text>
+        <Text style={styles.textStyle}>Works At :{auth.CurrentUser.worksAt}</Text>
+        <Button 
+        title="Edit Profile"
+        type="solid"
+          onPress={function () {
+            props.navigation.navigate("Edit");
+            }}
+        />
 
 
         </View>
@@ -66,7 +59,6 @@ const ProfileScreen = (props) => {
 
 const styles = StyleSheet.create({
   textStyle: {
-    margin: 30,
     fontSize: 20,
     color: "black",
   },

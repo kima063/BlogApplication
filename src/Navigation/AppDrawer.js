@@ -1,14 +1,14 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import ProfileScreen from "./../screens/ProfileScreen";
-import HomeTabScreen from "./HomeTab";
+import ProfieScreenStack from "./ProfileStack";
+import HomeScreenStack from "./HomeStack";
 const AppDrawer = createDrawerNavigator();
 
 const AppDrawerScreen = () => {
   return (
     <AppDrawer.Navigator>
-      <AppDrawer.Screen name="Home" component={HomeTabScreen} />
-      <AppDrawer.Screen name="Profile" component={ProfileScreen} />
+      <AppDrawer.Screen name="HomeTab" component={HomeScreenStack} />
+      <AppDrawer.Screen name="Profile" component={ProfieScreenStack} />
     </AppDrawer.Navigator>
   );
 };

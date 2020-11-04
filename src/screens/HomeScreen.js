@@ -19,6 +19,7 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../providers/AuthProvider";
 import { getPosts } from "./../requests/Posts";
 import { getUsers } from "./../requests/Users";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const HomeScreen = (props) => {
   const [posts, setPosts] = useState([]);
@@ -88,11 +89,17 @@ const HomeScreen = (props) => {
               data={posts}
               renderItem={function ({ item }) {
                 return (
-                  <PostCard
+                  <TouchableOpacity onPress={() => {
+                    props.navigation.navigate("IndividualPost");
+                  }
+
+                  } >
+                    <PostCard
                     author={getName(item.userId)}
                     title={item.title}
                     body={item.body}
                   />
+                  </TouchableOpacity>
                 );
               }}
             />

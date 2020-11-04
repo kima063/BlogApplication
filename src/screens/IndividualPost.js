@@ -1,26 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet, FlatList, AsyncStorage } from "react-native";
-import { Card, Button, Text, Avatar, Input } from "react-native-elements";
-import { AuthContext} from "../providers/AuthProvider";
+import React, { useState } from "react";
+import { View, StyleSheet, AsyncStorage} from "react-native";
+import { Text, Card, Button, Avatar, Header } from "react-native-elements";
+import { AuthContext } from "../providers/AuthProvider";
+import { TextInput } from 'react-native';
+const IndividualPostScreen = (props) => {
+  const [Profile, setProfile] = useState({});
+  const [EditWrite, SetWrite] = useState("");
+  return (
+    <AuthContext.Consumer>
+      {(auth) => (
+        <View style={styles.viewStyle}>
+        <Text style={styles.textStyle}>Name</Text>
+        <Text style={styles.textStyle}>posted On :  </Text>
+        <Text style={styles.textStyle}>21 Likes, 7 Comments</Text>
+        <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            placeholder = "Write Something!"
+            onChangeText={text => SetWrite(text)}
+            />
+        <Button 
+        title="Comment"
+        type="solid"
+        />
 
-const PostScreen = (props) => {
-    let user = AsyncStorage.auth().currentUser;
-    let userid = user.uid;
-    let username = user.displayName;
-    let postId = props.route.params.postid;
-    const [Post, setPost] = useState({});
-    const [Comment, setComment] = useState("");
+
+        </View>
+      )}
+    </AuthContext.Consumer>
+  );
+};
 
 const styles = StyleSheet.create({
-    textStyle: {
-        fontSize: 30,
-        color: "blue",
-    },
-    viewStyle: {
-        flex: 1,
-        justifyContent: 'center',
-    },
+  textStyle: {
+    fontSize: 20,
+    margin: 5,
+    color: "black",
+  },
+  viewStyle: {
+    alignItems: "center",
+    margin: 100,
+  },
 
+  avatarStyle: {
+    margin: 30,
+    alignSelf: "center",
+
+
+
+  }
 });
-
-export default PostScreen;}
+export default IndividualPostScreen;

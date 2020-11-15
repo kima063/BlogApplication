@@ -22,6 +22,7 @@ import { getUsers } from "./../requests/Users";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { addPostJSON, getDataJSON, storeDataJSON } from "./../functions/AsyncStorageFunctions";
 import {LogBox} from 'react-native';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const HomeScreen = (props) => {
   const netinfo = useNetInfo();
@@ -124,13 +125,18 @@ const HomeScreen = (props) => {
               keyExtractor={(item) => item.ID}
               renderItem={function ({ item }) {
                 return (
-                  <PostCard
-                    author={item.author}
-                    title={item.created_at}
-                    body={item.body}
-                    navigation={props.navigation}
-                    post={item}
-                  />
+                  <TouchableOpacity onPress={()=>{
+ 
+                    <PostCard
+                      author={item.author}
+                      title={item.created_at}
+                      body={item.body}
+                      navigation={props.navigation}
+                      post={item}
+                     />
+                     }}>
+
+                  </TouchableOpacity>
                 );
               }}
             />

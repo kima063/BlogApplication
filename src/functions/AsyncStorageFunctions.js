@@ -2,10 +2,7 @@ import { AsyncStorage } from "react-native";
 
 const addPostJSON = async (key, value) => {
   try {
-    let val = await AsyncStorage.getItem(key);
-    val = JSON.parse(val);
-    val.push(value);
-    const jsonValue = JSON.stringify(val);
+    const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
     alert("Post Added Succesfully.")
   } catch (error) {

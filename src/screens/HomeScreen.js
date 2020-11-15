@@ -20,7 +20,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { getPosts } from "./../requests/Posts";
 import { getUsers } from "./../requests/Users";
 import { useNetInfo } from "@react-native-community/netinfo";
-import { addPostJSON, getDataJSON, storeDataJSON } from "../functions/AsyncStorageFunction";
+import { addPostJSON, getDataJSON, storeDataJSON } from "./../functions/AsyncStorageFunctions";
 import {LogBox} from 'react-native';
 
 const HomeScreen = (props) => {

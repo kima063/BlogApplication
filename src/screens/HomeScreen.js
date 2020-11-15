@@ -126,6 +126,8 @@ const HomeScreen = (props) => {
               renderItem={function ({ item }) {
                 return (
                   <TouchableOpacity onPress={()=>{
+                    props.navigation.navigate("IndividualPost")
+                }}>
  
                     <PostCard
                       author={item.author}
@@ -134,7 +136,6 @@ const HomeScreen = (props) => {
                       navigation={props.navigation}
                       post={item}
                      />
-                     }}>
 
                   </TouchableOpacity>
                 );

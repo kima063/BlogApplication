@@ -5,4 +5,7 @@ npm install @react-navigation/drawer
 npm install react-native-elements
 npm install react-native-datepicker --save
 
-expo install expo-image-picker
+npm install react-native-image-picker --save
+
+npm install react-native link react-native-image-picker
+

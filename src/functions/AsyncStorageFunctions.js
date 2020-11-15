@@ -1,5 +1,18 @@
 import { AsyncStorage } from "react-native";
 
+const addPostJSON = async (key, value) => {
+  try {
+    let val = await AsyncStorage.getItem(key);
+    val = JSON.parse(val);
+    val.push(value);
+    const jsonValue = JSON.stringify(val);
+    await AsyncStorage.setItem(key, jsonValue);
+    alert("Post Added Succesfully.")
+  } catch (error) {
+    alert(error);
+  }
+};
+
 const storeData = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, value);
@@ -54,4 +67,4 @@ const removeData = async (key) => {
   }
 };
 
-export { storeData, storeDataJSON, getData, getDataJSON, removeData };
+export { storeData, storeDataJSON, getData, getDataJSON, removeData, addPostJSON };

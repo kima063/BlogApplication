@@ -4,6 +4,11 @@ import { Card, Button, Text, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 
 const PostCard = (props) => {
+  let post = {
+    author: props.author,
+    title: props.title,
+    body: props.body
+  }
   return (
     <Card>
       <View

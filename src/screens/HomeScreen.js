@@ -19,39 +19,42 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../providers/AuthProvider";
 import { getPosts } from "./../requests/Posts";
 import { getUsers } from "./../requests/Users";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNetInfo } from "@react-native-community/netinfo";
+import { addPostJSON, getDataJSON, storeDataJSON } from "../functions/AsyncStorageFunction";
+import {LogBox} from 'react-native';
 
 const HomeScreen = (props) => {
+  const netinfo = useNetInfo();
+  if (netinfo.type != "unknown" && !netinfo.isInternetReachable) {
+    alert("No Internet!");
+  }
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [recentPost, setRecentPost] = useState([]);
+  const [postNo, setPostNo] = useState(0);
+  const [postDate, setPostDate] = useState("");
+  var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   const loadPosts = async () => {
     setLoading(true);
-    const response = await getPosts();
-    if (response.ok) {
-      setPosts(response.data);
-    }
+    let temp_posts = await getDataJSON("Posts");
+    setPosts(temp_posts);
+    setLoading(false);
   };
-
   const loadUsers = async () => {
     const response = await getUsers();
     if (response.ok) {
       setUsers(response.data);
+    } else {
+      alert(response.problem);
     }
-    setLoading(false);
-  };
-  const getName = (id) => {
-    let Name = "";
-    users.forEach((element) => {
-      if (element.id == id) Name = element.name;
-    });
-    return Name;
-  };
+};
 
   useEffect(() => {
     loadPosts();
-    loadUsers();
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
 
   if (!loading) {
@@ -81,25 +84,53 @@ const HomeScreen = (props) => {
               <Input
                 placeholder="What's On Your Mind?"
                 leftIcon={<Entypo name="pencil" size={24} color="black" />}
+                onChangeText={
+                  function (currentPost) {
+                    setRecentPost(currentPost);
+                  }
+                }
               />
-              <Button title="Post" type="outline" onPress={function () {}} />
+              <Button title="Post" type="outline" onPress={function () {
+                setLoading(true);
+                setPostNo(postNo + 1);
+                var date = new Date().getDate();
+                var month = monthNames[new Date().getMonth()];
+                var year = new Date().getFullYear();
+                setPostDate(date + ' ' + month + ' ' + year);
+                console.log(postDate);
+                let postDetail = {
+                  ID: postNo,
+                  author: auth.CurrentUser.name,
+                  body: recentPost,
+                  created_at: "Posted On " + postDate,
+                  likes: [],
+                  comments: []
+                }
+                if (posts == undefined) {
+                  setPosts([postDetail]);
+                  storeDataJSON('Posts', [postDetail]);
+                } else {
+                  setPosts([...posts, postDetail]);
+                  addPostJSON('Posts', postDetail);
+                }
+                setLoading(false);
+              }} />
             </Card>
 
             <FlatList
               data={posts}
+              inverted={true}
+              scrollsToTop={true}
+              keyExtractor={(item) => item.ID}
               renderItem={function ({ item }) {
                 return (
-                  <TouchableOpacity onPress={() => {
-                    props.navigation.navigate("IndividualPost");
-                  }
-
-                  } >
-                    <PostCard
-                    author={getName(item.userId)}
-                    title={item.title}
+                  <PostCard
+                    author={item.author}
+                    title={item.created_at}
                     body={item.body}
+                    navigation={props.navigation}
+                    post={item}
                   />
-                  </TouchableOpacity>
                 );
               }}
             />

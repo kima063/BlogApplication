@@ -44,7 +44,7 @@ const PostCard = (props) => {
         />
         <Button type="solid" title="Comment (10)" onPress={
           function() {
-            props.navigation.navigate("PostScreen", props.post);
+            props.navigation.navigate("IndividualPost", props.post);
           }
          } />
       </View>

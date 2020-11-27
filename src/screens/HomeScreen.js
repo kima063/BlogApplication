@@ -25,17 +25,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const input = React.createRef();
 
 const HomeScreen = (props) => {
-  // const netinfo = useNetInfo();
-  // if (netinfo.type != "unknown" && !netinfo.isInternetReachable) {
-  //   alert("No Internet!");
-  // }
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [recentPost, setRecentPost] = useState([""]);
   const loadPosts = async () => {
     setLoading(true);
-    alert("working i m ")
-  
     let temp_posts = await getDataJSON("Posts");
     setPosts(temp_posts);
     setLoading(false);
@@ -87,7 +81,7 @@ const HomeScreen = (props) => {
 
               <Button title="Post" type="outline" onPress={function () {
                 setLoading(true);
-                alert("working i m ")
+                // alert("working i m ")
                 let flag = 0;
                 if (posts == undefined) {
                   flag = 1;
@@ -108,7 +102,7 @@ const HomeScreen = (props) => {
                   storeDataJSON('Posts', [postDetail]);
                 } 
                 else {
-                  //setPosts([...posts, postDetail]);
+                  setPosts([...posts, postDetail]);
                   addDataJSON('Posts', postDetail);
                 }
                 input.current.clear();
@@ -117,7 +111,7 @@ const HomeScreen = (props) => {
               }} />
               
             </Card>
-            <SafeAreaView style={flex=1}>
+            <SafeAreaView>
 
             <FlatList
               data={posts}

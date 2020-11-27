@@ -17,45 +17,29 @@ import {
 import PostCard from "./../components/PostCard";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../providers/AuthProvider";
-import { getPosts } from "./../requests/Posts";
-import { getUsers } from "./../requests/Users";
 import { useNetInfo } from "@react-native-community/netinfo";
 import { addPostJSON, getDataJSON, storeDataJSON } from "./../functions/AsyncStorageFunctions";
-import {LogBox} from 'react-native';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import moment from "moment";
+import { SafeAreaView } from "react-native-safe-area-context";
+const input = React.createRef();
 
 const HomeScreen = (props) => {
-  const netinfo = useNetInfo();
-  if (netinfo.type != "unknown" && !netinfo.isInternetReachable) {
-    alert("No Internet!");
-  }
+  // const netinfo = useNetInfo();
+  // if (netinfo.type != "unknown" && !netinfo.isInternetReachable) {
+  //   alert("No Internet!");
+  // }
   const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [recentPost, setRecentPost] = useState([]);
-  const [postNo, setPostNo] = useState(0);
-  const [postDate, setPostDate] = useState("");
-  var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
   const loadPosts = async () => {
     setLoading(true);
     let temp_posts = await getDataJSON("Posts");
     setPosts(temp_posts);
     setLoading(false);
   };
-  const loadUsers = async () => {
-    const response = await getUsers();
-    if (response.ok) {
-      setUsers(response.data);
-    } else {
-      alert(response.problem);
-    }
-};
 
   useEffect(() => {
     loadPosts();
-    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
   }, []);
 
   if (!loading) {
@@ -83,27 +67,32 @@ const HomeScreen = (props) => {
             />
             <Card>
               <Input
-                placeholder="What's On Your Mind?"
-                leftIcon={<Entypo name="pencil" size={24} color="black" />}
-                onChangeText={
-                  function (currentPost) {
-                    setRecentPost(currentPost);
-                  }
+              ref = {input}
+              clearButtonMode = {'always'}
+              clearButtonMode = {'always'}
+              placeholder="What's On Your Mind?"
+              leftIcon={<Entypo name="pencil" size={24} color="black" />}
+              onChangeText={
+                function (currentPost) {
+                  setRecentPost(currentPost);
                 }
-              />
+              }
+            />
+
               <Button title="Post" type="outline" onPress={function () {
                 setLoading(true);
-                setPostNo(postNo + 1);
-                var date = new Date().getDate();
-                var month = monthNames[new Date().getMonth()];
-                var year = new Date().getFullYear();
-                setPostDate(date + ' ' + month + ' ' + year);
-                console.log(postDate);
+                let flag = 0;
+                if (posts == undefined) {
+                  flag = 1;
+                }
+                else {
+                  flag = posts.length + 1;
+                }
                 let postDetail = {
-                  ID: postNo,
+                  post_ID: flag,
                   author: auth.CurrentUser.name,
                   body: recentPost,
-                  created_at: "Posted On " + postDate,
+                  created_at: "Posted On " + moment().format("DD MMM, YYYY"),
                   likes: [],
                   comments: []
                 }
@@ -112,17 +101,21 @@ const HomeScreen = (props) => {
                   storeDataJSON('Posts', [postDetail]);
                 } else {
                   setPosts([...posts, postDetail]);
-                  addPostJSON('Posts', postDetail);
+                  addDataJSON('Posts', postDetail);
                 }
+                input.current.clear();
+                setRecentPost();
                 setLoading(false);
               }} />
+              
             </Card>
+            <SafeAreaView style={flex=1}>
 
             <FlatList
               data={posts}
               inverted={true}
               scrollsToTop={true}
-              keyExtractor={(item) => item.ID}
+              keyExtractor={(item) => item.post_ID}
               renderItem={function ({ item }) {
                 return (
                     <PostCard
@@ -135,6 +128,7 @@ const HomeScreen = (props) => {
                 );
               }}
             />
+            </SafeAreaView>
           </View>
         )}
       </AuthContext.Consumer>

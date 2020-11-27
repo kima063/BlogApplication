@@ -42,7 +42,11 @@ const PostCard = (props) => {
           title="  Like (17)"
           icon={<AntDesign name="like2" size={24} color="dodgerblue" />}
         />
-        <Button type="solid" title="Comment (10)" />
+        <Button type="solid" title="Comment (10)" onPress={
+          function() {
+            props.navigation.navigate("PostScreen", props.post);
+          }
+         } />
       </View>
     </Card>
   );

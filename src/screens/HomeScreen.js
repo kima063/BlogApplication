@@ -40,11 +40,11 @@ const HomeScreen = (props) => {
     setPosts(temp_posts);
     setLoading(false);
   };
-  clearAsyncStorage = async() =>{
-    AsyncStorage.clear();}
+  // clearAsyncStorage = async() =>{
+  //   AsyncStorage.clear();}
 
   useEffect(() => {
-    clearAsyncStorage();
+    // clearAsyncStorage();
     loadPosts();
   }, []);
 

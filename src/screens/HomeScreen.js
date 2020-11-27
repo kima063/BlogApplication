@@ -99,14 +99,14 @@ const HomeScreen = (props) => {
                   likes: [],
                   comments: []
                 }
-                // if (posts == undefined) {
-                //   setPosts([postDetail]);
-                //   storeDataJSON('Posts', [postDetail]);
-                // } 
-                // else {
-                  setPosts([...posts, postDetail]);
+                if (posts == undefined) {
+                  setPosts([postDetail]);
+                  storeDataJSON('Posts', [postDetail]);
+                } 
+                else {
+                  //setPosts([...posts, postDetail]);
                   addDataJSON('Posts', postDetail);
-                // }
+                }
                 input.current.clear();
                 setRecentPost("");
                 setLoading(false);

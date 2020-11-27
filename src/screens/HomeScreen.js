@@ -21,6 +21,7 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import { addPostJSON, getDataJSON, storeDataJSON , addDataJSON } from "./../functions/AsyncStorageFunctions";
 import moment from "moment";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const input = React.createRef();
 
 const HomeScreen = (props) => {
@@ -39,8 +40,11 @@ const HomeScreen = (props) => {
     setPosts(temp_posts);
     setLoading(false);
   };
+  clearAsyncStorage = async() =>{
+    AsyncStorage.clear();}
 
   useEffect(() => {
+    clearAsyncStorage();
     loadPosts();
   }, []);
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, } from "react-native";
-import { Card, Button, Text, FlatList, Avatar, ActivityIndicator, Input, Header, SafeAreaView } from "react-native-elements";
+import { Card, Button, Text, Avatar, ActivityIndicator, Input, Header, SafeAreaView } from "react-native-elements";
+import {FlatList} from "react-native";
 import { AuthContext } from "../providers/AuthProvider";
 import { Entypo } from "@expo/vector-icons";
 import { storeDataJSON, addDataJSON, getDataJSON } from './../functions/AsyncStorageFunctions';
@@ -22,11 +23,22 @@ const IndividualPostScreen = (props) => {
         let allcomments = await getDataJSON('Comments');
         setComments(allcomments);
         if (allcomments != null) {
-            setPostComments(allcomments.filter((el) => el.postid == info.postid));
+            setPostComments(allcomments.filter((el) => el.post_ID == info.post_ID));
         } else {
             setPostComments([]);
         }
     };
+
+    // const loadLikes = async () => {
+    //     setLoading(true);
+    //     let likes = await getDataJSON('Likes');
+    //     setLikes(likes);
+    //     if (likes != null) {
+    //         setLikes(likes == likes.length);
+    //     } else {
+    //         likes== 0;
+    //     }
+    // };
 
     useEffect(() => {
         loadComments();
@@ -139,9 +151,9 @@ const IndividualPostScreen = (props) => {
 
                     
                     <FlatList
-                        data={postComments}
+                        data={postComments.reverse()}
                         scrollsToTop={true}
-                        //keyExtractor={(item) => item.comment_ID}
+                        keyExtractor={(item) => item.comment_ID}
                         renderItem={function ({ item }) {
                             return (
                                 <CommentCard

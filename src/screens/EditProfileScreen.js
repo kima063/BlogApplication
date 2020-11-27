@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, Card, Button, Avatar, Header } from "react-native-elements";
 import { AuthContext } from "../providers/AuthProvider";
 import { TextInput } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+import DatePicker from '@react-native-community/datetimepicker';
 
 
 const EditProfileScreen = (props) => {

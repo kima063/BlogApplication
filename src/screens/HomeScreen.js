@@ -116,7 +116,8 @@ const HomeScreen = (props) => {
             <FlatList
               data={posts}
               inverted={true}
-              scrollsToTop={true}
+              //scrollsToTop={true}
+              scrollEnabled={true}
               keyExtractor={(item) => item.post_ID}
               renderItem={function ({ item }) {
                 return (

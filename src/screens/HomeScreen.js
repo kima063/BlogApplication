@@ -18,7 +18,7 @@ import PostCard from "./../components/PostCard";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNetInfo } from "@react-native-community/netinfo";
-import { addPostJSON, getDataJSON, storeDataJSON } from "./../functions/AsyncStorageFunctions";
+import { addPostJSON, getDataJSON, storeDataJSON , addDataJSON } from "./../functions/AsyncStorageFunctions";
 import moment from "moment";
 import { SafeAreaView } from "react-native-safe-area-context";
 const input = React.createRef();

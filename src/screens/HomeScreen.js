@@ -30,9 +30,11 @@ const HomeScreen = (props) => {
   // }
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [recentPost, setRecentPost] = useState([]);
+  const [recentPost, setRecentPost] = useState([""]);
   const loadPosts = async () => {
     setLoading(true);
+    alert("working i m ")
+  
     let temp_posts = await getDataJSON("Posts");
     setPosts(temp_posts);
     setLoading(false);
@@ -81,6 +83,7 @@ const HomeScreen = (props) => {
 
               <Button title="Post" type="outline" onPress={function () {
                 setLoading(true);
+                alert("working i m ")
                 let flag = 0;
                 if (posts == undefined) {
                   flag = 1;
@@ -96,15 +99,16 @@ const HomeScreen = (props) => {
                   likes: [],
                   comments: []
                 }
-                if (posts == undefined) {
-                  setPosts([postDetail]);
-                  storeDataJSON('Posts', [postDetail]);
-                } else {
+                // if (posts == undefined) {
+                //   setPosts([postDetail]);
+                //   storeDataJSON('Posts', [postDetail]);
+                // } 
+                // else {
                   setPosts([...posts, postDetail]);
                   addDataJSON('Posts', postDetail);
-                }
+                // }
                 input.current.clear();
-                setRecentPost();
+                setRecentPost("");
                 setLoading(false);
               }} />
               

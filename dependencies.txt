@@ -4,4 +4,5 @@ npm install @react-navigation/material-bottom-tabs react-native-paper
 npm install @react-navigation/drawer
 npm install react-native-elements
 npm install react-native-datepicker --save
+npm install @react-native-async-storage/async-storage
 

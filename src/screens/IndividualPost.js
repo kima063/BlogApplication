@@ -44,7 +44,7 @@ const IndividualPostScreen = (props) => {
                                 props.navigation.toggleDrawer();
                             },
                         }}
-                        centerComponent={{ text: "Somewhere In Blog", style: { color: "#fff" } }}
+                        centerComponent={{ text: " ", style: { color: "#fff" } }}
                         rightComponent={{
                             icon: "lock-outline",
                             color: "#fff",
@@ -80,13 +80,13 @@ const IndividualPostScreen = (props) => {
                             {info.body}
                         </Text>
                     </Card>
-                    <Text style={styles.textstyle}>0 Likes, 0 Comments.</Text>
+                    <Text style={styles.textstyle}>0 Likes, {postComments.length} Comments.</Text>
 
                     <Card.Divider />
                     <Input
                         ref={input}
                         clearButtonMode={'always'}
-                        placeholder="  Write Something!"
+                        placeholder="Write Something!"
                         leftIcon={<Entypo name="pencil" size={24} color="black" />}
                         style={styles.inputStyle}
                         multiline={true}
@@ -135,25 +135,26 @@ const IndividualPostScreen = (props) => {
                         }
                         />
                     </View>
-                    <SafeAreaView style={flex = 1}>
-                        <FlatList
-                            data={postComments}
-                            scrollsToTop={true}
-                            keyExtractor={(item) => item.comment_ID}
-                            renderItem={function ({ item }) {
-                                return (
-                                    <CommentCard
-                                        author={item.author}
-                                        time={item.time}
-                                        body={item.body}
-                                    />
-                                );
-                            }}
-                        />
-                    </SafeAreaView>
+
+
+                    
+                    <FlatList
+                        data={postComments}
+                        scrollsToTop={true}
+                        //keyExtractor={(item) => item.comment_ID}
+                        renderItem={function ({ item }) {
+                            return (
+                                <CommentCard
+                                    author={item.author}
+                                    time={item.time}
+                                    body={item.body}
+                                />
+                            );
+                        }}
+                    />
                 </View>
-            )}
-        </AuthContext.Consumer>
+             )}
+        </AuthContext.Consumer> 
     )
 }
 const styles = StyleSheet.create({

@@ -72,7 +72,7 @@ const getDataJSON = async (key) => {
 const removeData = async (key) => {
   try {
     await AsyncStorage.removeItem(key);
-    alert("Data Removed Successfully");
+    alert("Deleted!");
   } catch (error) {
     alert(error);
   }

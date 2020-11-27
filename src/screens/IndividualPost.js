@@ -21,7 +21,7 @@ const IndividualPostScreen = (props) => {
     const loadComments = async () => {
         setLoading(true);
         let allcomments = await getDataJSON('Comments');
-        setComments(allcomments);
+        setallComments(allcomments);
         if (allcomments != null) {
             setPostComments(allcomments.filter((el) => el.post_ID == info.post_ID));
         } else {

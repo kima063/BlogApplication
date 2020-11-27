@@ -5,6 +5,7 @@ import { Text, Card, Button, Avatar, Header } from "react-native-elements";
 import { AuthContext } from "../providers/AuthProvider";
 import { TextInput } from 'react-native';
 import DatePicker from '@react-native-community/datetimepicker';
+import UploadPhoto from "../components/UploadPhoto";
 
 
 const EditProfileScreen = (props) => {
@@ -50,13 +51,9 @@ const EditProfileScreen = (props) => {
             showAccessory
             accessory={{ containerStyle: { backgroundColor: "#1C1C1C" } }}
             />
-  
-            <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            placeholder = "Edit Your Name"
-            onChangeText={text => SetName(text)}
-            />
-            
+            <View>
+              <UploadPhoto props={props} />
+            </View>
 
           <DatePicker
           style={styles.datePickerStyle}
@@ -96,6 +93,16 @@ const EditProfileScreen = (props) => {
             placeholder = "Edit Your Work Place"
             onChangeText={text => SetWorkPlace(text)}
             />
+
+            <View>
+            <Button
+                      onPress={() => {
+                          alert('This is a button!');
+                      }}
+                      title="Save"
+                      color="#fff"
+                    />
+            </View>
   
   
           </View>

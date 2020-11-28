@@ -4,8 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, Card, Button, Avatar, Header } from "react-native-elements";
 import { AuthContext } from "../providers/AuthProvider";
 import { TextInput } from 'react-native';
-import DatePicker from '@react-native-community/datetimepicker';
+import {DateTimePicker} from "@react-native-community/datetimepicker";
 import UploadPhoto from "../components/UploadPhoto";
+import {storeDataJSON} from "./../functions/AsyncStorageFunctions";
 
 
 const EditProfileScreen = (props) => {
@@ -13,6 +14,7 @@ const EditProfileScreen = (props) => {
     const [date, setDate] = useState("25.06.2019");
     const [EditAddress, SetAddress] = useState("");
     const [EditWorkPlace, SetWorkPlace] = useState("");
+    const [SelectImage , SetImage] = useState("");
 
 
   
@@ -28,7 +30,7 @@ const EditProfileScreen = (props) => {
                   props.navigation.toggleDrawer();
                 },
               }}
-              centerComponent={{ text: "The Office", style: { color: "#fff" } }}
+              centerComponent={{ text: "Edit User Profile", style: { color: "#fff" } }}
               rightComponent={{
                 icon: "lock-outline",
                 color: "#fff",
@@ -39,22 +41,19 @@ const EditProfileScreen = (props) => {
               }}
             />
             
-            {/* <Avatar
-            containerStyle={styles.avatarStyle}
-            rounded
-            source=
-                    {require('./../../assets/pujo_white.jpg')}
-            size={200}
-            //onAccessoryPress={() => Alert.alert("change avatar")}
-            overlayContainerStyle={{ backgroundColor: "#1C1C1C" }}
-            showAccessory
-            accessory={{ containerStyle: { backgroundColor: "#1C1C1C" } }}
-            /> */}
             <View>
               <UploadPhoto props={props} />
             </View>
 
-          {/* <DatePicker
+ <TouchableOpacity key={UploadPhoto} onPress={() => {
+                                      this.props.navigation.navigate("ProfileScreen", {
+                                        /* image params go here */
+                                      });
+                                    }}>
+            </TouchableOpacity>
+ 
+
+          <DateTimePicker
           style={styles.datePickerStyle}
           date={date} // Initial date from state
           mode="date" // The enum of date, datetime and time
@@ -79,7 +78,7 @@ const EditProfileScreen = (props) => {
           onDateChange={(date) => {
             setDate(date);
           }}
-        /> */}
+        />
 
         <TextInput
             style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
@@ -93,10 +92,22 @@ const EditProfileScreen = (props) => {
             onChangeText={text => SetWorkPlace(text)}
             />
 
-            <View>
+            <View style={styles.viewStyle}>
             <Button
                       onPress={() => {
-                          alert('This is a button!');
+                        let user={
+                          name: auth.CurrentUser.name,
+                          sid: auth.CurrentUser.sid ,
+                          email: auth.CurrentUser.email,
+                          Password: auth.CurrentUser.password,
+                          BornOn: date,
+                          Address: EditAddress,
+                          Works_At: EditWorkPlace,
+
+                        }
+                        storeDataJSON(auth.CurrentUser.email , user);
+                        auth.setCurrentUser(user);
+                        props.navigation.navigate("ProfileScreen");
                       }}
                       title="Save"
                       color="#fff"
@@ -117,6 +128,8 @@ const EditProfileScreen = (props) => {
     },
     viewStyle: {
       flex: 1,
+      fontSize: 20,
+      alignItems: "center",
     },
   
     avatarStyle: {

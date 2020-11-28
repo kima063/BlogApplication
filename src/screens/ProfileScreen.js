@@ -18,7 +18,7 @@ const ProfileScreen = (props) => {
                 props.navigation.toggleDrawer();
               },
             }}
-            centerComponent={{ text: "The Office", style: { color: "#fff" } }}
+            centerComponent={{ text: "User Profile", style: { color: "#fff" } }}
             rightComponent={{
               icon: "lock-outline",
               color: "#fff",
@@ -40,16 +40,18 @@ const ProfileScreen = (props) => {
           showAccessory
           accessory={{ containerStyle: { backgroundColor: "#1C1C1C" } }}
         />
-          <View style={styles.viewStyle2}>
+          <View style={styles.viewStyle}>
           {/* <UploadPhoto props={props} /> */}
-            <Text style={styles.textStyle2}>
-              {auth.CurrentUser.name}
-            </Text>
 
           </View>
+        <Text style={styles.textStyle}>Name :{auth.CurrentUser.name}</Text>
+        <Text style={styles.textStyle}>S_ID :{auth.CurrentUser.sid}</Text>
+        <Text style={styles.textStyle}>Email :{auth.CurrentUser.email}</Text>
+        <Text style={styles.textStyle}>Password :{auth.CurrentUser.password}</Text>
         <Text style={styles.textStyle}>Born On :{auth.CurrentUser.BornOn}</Text>
-        <Text style={styles.textStyle}>Address :{auth.CurrentUser.address}</Text>
-        <Text style={styles.textStyle}>Works At :{auth.CurrentUser.worksAt}</Text>
+        <Text style={styles.textStyle}>Address :{auth.CurrentUser.Address}</Text>
+        <Text style={styles.textStyle}>Works At :{auth.CurrentUser.Works_At}</Text>
+        <View style={styles.viewStyle}>    
         <Button 
         title="Edit Profile"
         type="solid"
@@ -57,6 +59,9 @@ const ProfileScreen = (props) => {
             props.navigation.navigate("Edit");
             }}
         />
+        </View>
+
+        <View style={styles.viewStyle}>
         <Button
               title={' Delete Profile '}
               onPress={function () {
@@ -68,6 +73,7 @@ const ProfileScreen = (props) => {
               }}
             />
 
+        </View>
 
         </View>
       )}
@@ -81,7 +87,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   viewStyle: {
-    flex: 1,
+
   },
 
   avatarStyle: {

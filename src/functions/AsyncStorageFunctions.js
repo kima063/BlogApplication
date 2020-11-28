@@ -4,7 +4,7 @@ const addPostJSON = async (key, value) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
-    alert("Post Added Succesfully.")
+    alert("Post Added")
   } catch (error) {
     alert(error);
   }
@@ -27,7 +27,7 @@ const addDataJSON = async (key, value) => {
 const storeData = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, value);
-    alert("Data STored Successfully!");
+    alert("Stored Successfully!");
   } catch (error) {
     alert(error);
   }
@@ -37,7 +37,7 @@ const storeDataJSON = async (key, value) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem(key, jsonValue);
-    alert("Data STored Successfully!");
+    alert("Stored Successfully!");
   } catch (error) {
     alert(error);
   }

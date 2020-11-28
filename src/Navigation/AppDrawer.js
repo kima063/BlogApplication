@@ -7,8 +7,8 @@ const AppDrawer = createDrawerNavigator();
 const AppDrawerScreen = () => {
   return (
     <AppDrawer.Navigator>
-      <AppDrawer.Screen name="HomeTab" component={HomeScreenStack} />
-      <AppDrawer.Screen name="Profile" component={ProfieScreenStack} />
+      <AppDrawer.Screen name="HomeTab" component={HomeScreenStack} options={{ headerShown: false }} />
+      <AppDrawer.Screen name="Profile" component={ProfieScreenStack} options={{ headerShown: false }} />
     </AppDrawer.Navigator>
   );
 };

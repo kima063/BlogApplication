@@ -13,7 +13,7 @@ const SignUpScreen = (props) => {
   return (
     <View style={styles.viewStyle}>
       <Card>
-        <Card.Title>Welcome to AuthApp!</Card.Title>
+        <Card.Title>Welcome to BlogApp!</Card.Title>
         <Card.Divider />
         <Input
           leftIcon={<Ionicons name="ios-person" size={24} color="black" />}
@@ -56,6 +56,9 @@ const SignUpScreen = (props) => {
               sid: SID,
               email: Email,
               password: Password,
+              BornOn: "Not Set Yet",
+              Address: "Not Set Yet",
+              WorksAt: "Not Set Yet",
             };
             
             storeDataJSON(Email, currentUser);

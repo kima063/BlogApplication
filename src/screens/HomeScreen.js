@@ -37,7 +37,7 @@ const HomeScreen = (props) => {
   };
 
   deleteItemById = id => {
-    const filteredData = AllPost.filter(item=> item.post_ID != ID);
+    const filteredData = posts.filter(item=> item.post_ID !=id);
     return filteredData;
   }
   // clearAsyncStorage = async() =>{
@@ -61,7 +61,7 @@ const HomeScreen = (props) => {
                   props.navigation.toggleDrawer();
                 },
               }}
-              centerComponent={{ text: "The Office", style: { color: "#fff" } }}
+              // centerComponent={{ text: "", style: { color: "#fff" } }}
               rightComponent={{
                 icon: "lock-outline",
                 color: "#fff",
@@ -129,13 +129,13 @@ const HomeScreen = (props) => {
                 return (
                   <TouchableOpacity onLongPress= {async ()=>{
                     setLoading(true);
-                    if (AllPost.length == 1){
+                    if (posts.length == 1){
                       removeData("Posts");
-                      setAllPost([]);
+                      setPosts([]);
                     }
                     else{
-                      setAllPost(deleteItemById(item.post_ID));
-                      storeDataJSON([AllPost]);
+                      setPosts(deleteItemById(item.post_ID));
+                      storeDataJSON([posts]);
                     }
                     setLoading(false);
                   }}>

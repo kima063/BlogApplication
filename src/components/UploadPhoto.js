@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Platform } from 'react-native';
+import { View, Platform , StyleSheet} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Avatar,} from 'react-native-elements';
 
@@ -34,6 +34,7 @@ const UploadPhoto=() =>{
   return (
     <View>
       <Avatar
+      containerStyle={styles.avatarStyle}
             size="xlarge"
             onPress={function(){
               pickImage()
@@ -42,9 +43,28 @@ const UploadPhoto=() =>{
             source={{
               uri: photo 
                  }}
+            overlayContainerStyle={{ backgroundColor: "#1C1C1C" }}
+            showAccessory
+            accessory={{ containerStyle: { backgroundColor: "#1C1C1C" } }}
                 />
    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  textStyle: {
+    fontSize: 20,
+    color: "black",
+  },
+  viewStyle: {
+    flex: 1,
+  },
+
+  avatarStyle: {
+    margin: 30,
+    alignSelf: "center",
+
+  },
+})
 
 export default  UploadPhoto;

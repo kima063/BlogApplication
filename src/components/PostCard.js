@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Card, Button, Text, Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { AuthContext } from "./../providers/AuthProvider";
-import { storeDataJSON, addDataJSON, getDataJSON, removeData } from './../functions/AsyncStorageFunction';
+import { storeDataJSON, addDataJSON, getDataJSON, removeData } from './../functions/AsyncStorageFunctions';
 
 const PostCard = (props) => {
   const [postComments, setPostComments] = useState([]);

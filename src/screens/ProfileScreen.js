@@ -45,16 +45,7 @@ const ProfileScreen = (props) => {
             <Text style={styles.textStyle2}>
               {auth.CurrentUser.name}
             </Text>
-            <Button
-              title={' Delete Profile '}
-              onPress={function () {
-                let key = auth.CurrentUser.email;
-                removeData(key);
-                auth.setIsLoggedIn(false);
-                auth.setCurrentUser({});
-                alert("Profile Deleted");
-              }}
-            />
+
           </View>
         <Text style={styles.textStyle}>Born On :{auth.CurrentUser.BornOn}</Text>
         <Text style={styles.textStyle}>Address :{auth.CurrentUser.address}</Text>
@@ -66,6 +57,16 @@ const ProfileScreen = (props) => {
             props.navigation.navigate("Edit");
             }}
         />
+        <Button
+              title={' Delete Profile '}
+              onPress={function () {
+                let key = auth.CurrentUser.email;
+                removeData(key);
+                auth.setIsLoggedIn(false);
+                auth.setCurrentUser({});
+                alert("Profile Deleted");
+              }}
+            />
 
 
         </View>

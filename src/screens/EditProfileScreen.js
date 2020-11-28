@@ -10,7 +10,6 @@ import UploadPhoto from "../components/UploadPhoto";
 
 const EditProfileScreen = (props) => {
     const [Profile, setProfile] = useState({});
-    const [EditName, SetName] = useState("");
     const [date, setDate] = useState("25.06.2019");
     const [EditAddress, SetAddress] = useState("");
     const [EditWorkPlace, SetWorkPlace] = useState("");

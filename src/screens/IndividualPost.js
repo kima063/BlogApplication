@@ -7,7 +7,6 @@ import { Entypo } from "@expo/vector-icons";
 import { storeDataJSON, addDataJSON, getDataJSON } from './../functions/AsyncStorageFunctions';
 import CommentCard from "../components/CommentCard";
 import moment from "moment";
-import PostCard from "./../components/PostCard";
 
 const IndividualPostScreen = (props) => {
     let info = props.route.params;

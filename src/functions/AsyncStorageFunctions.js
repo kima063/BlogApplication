@@ -49,7 +49,7 @@ const getData = async (key) => {
     if (data != null) {
       return data;
     } else {
-      alert("No data with this key!");
+      //alert("");
     }
   } catch (error) {
     alert(error);
@@ -62,10 +62,10 @@ const getDataJSON = async (key) => {
       const jsonData = JSON.parse(data);
       return jsonData;
     } else {
-      alert("No data with this key!");
+      //alert("");
     }
   } catch (error) {
-    alert(error);
+    //alert(error);
   }
 };
 

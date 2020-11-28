@@ -30,7 +30,7 @@ const HomeScreen = (props) => {
   const [recentPost, setRecentPost] = useState([""]);
   const loadPosts = async () => {
     setLoading(true);
-    let temp_posts = await getDataJSON("Posts");
+    let temp_posts = await getDataJSON('Posts');
     setPosts(temp_posts);
     setLoading(false);
   };

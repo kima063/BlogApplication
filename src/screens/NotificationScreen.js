@@ -1,61 +1,75 @@
-import React, { useState } from "react";
-import { View, StyleSheet, AsyncStorage} from "react-native";
-import { Text, Card, Button, Avatar, Header } from "react-native-elements";
-import { AuthContext } from "../providers/AuthProvider";
-const NotificationScreen = (props) => {
-  return (
-    <AuthContext.Consumer>
-      {(auth) => (
-        <View style={styles.viewStyle}>
-          <Header
-            leftComponent={{
-              icon: "menu",
-              color: "#fff",
-              onPress: function () {
-                props.navigation.toggleDrawer();
-              },
-            }}
-            centerComponent={{ text: "The Office", style: { color: "#fff" } }}
-            rightComponent={{
-              icon: "lock-outline",
-              color: "#fff",
-              onPress: function () {
-                auth.setIsLoggedIn(false);
-                auth.setCurrentUser({});
-              },
-            }}
-          />
-          <Card>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Avatar
-                containerStyle={{ backgroundColor: "cyan" }}
-                rounded
-                icon={{
-                  name: "thumbs-o-up",
-                  type: "font-awesome",
-                  color: "black",
-                }}
-                activeOpacity={1}
-              />
-              <Text style={{ paddingHorizontal: 10 }}>
-                Pam Beesley Liked Your Post.
-              </Text>
-            </View>
-          </Card>
-        </View>
-      )}
-    </AuthContext.Consumer>
-  );
-};
+// import React,{useState,useEffect} from 'react';
+// import {  FlatList, View } from 'react-native';
+// import {Header} from 'react-native-elements';
+// import {AuthContext} from '../providers/AuthProvider';
+// import { Ionicons} from '@expo/vector-icons';
+// import { getDataJSON } from "./../functions/AsyncStorageFunctions";
+// import  ShowNotification  from "./../components/NotifactionShow";
 
-const styles = StyleSheet.create({
-  textStyle: {
-    fontSize: 30,
-    color: "blue",
-  },
-  viewStyle: {
-    flex: 1,
-  },
-});
 
-export default NotificationScreen;
+// const  NotificationScreen =({navigation})=> {
+//     let [notification,setNotification]=useState([]);
+//     const [reload,setReload]=useState(false);
+
+//     const getNotification = async ()=>{
+//         setReload(true)
+//         let notify=await getDataJSON('notification');
+//         if(notify!=null ){
+//             setNotification(notify);
+//         }
+//         else
+//             console.log("No Notification");
+//         setReload(false);
+//     }
+//     useEffect(()=>{
+//         getNotification();
+//     },[]);
+
+//     return(
+//         <AuthContext.Consumer>
+//             {(auth)=>
+//             (
+//                 <View style={{flex:1}} >
+//                     <Header
+//                     containerStyle={{
+//                     backgroundColor: '#930077',
+//                     justifyContent: 'space-around',
+//                 }}
+//                     leftComponent={<Ionicons name="md-menu" size={25} color="white" onPress={()=>{
+//                         navigation.openDrawer();
+//                     }}/>}
+//                     centerComponent={{ text: 'Notification', style: {fontSize:20, color: '#fff' } }}
+//                     rightComponent={<Ionicons name="md-lock" size={25} color="white" 
+//                     onPress={()=>{
+//                         auth.setisLogged(false);
+//                         auth.setcurrentUser({});
+//                     }}/>}
+//                     />
+//                     <View>
+//                         <FlatList
+//                         data={notification}
+//                         onRefresh={getNotification}
+//                         refreshing={reload}
+//                         renderItem={function ({ item }) {
+//                             if(item.receiver==auth.currentUser.email)
+//                                 return (
+//                                 <ShowNotification
+//                                     content={item}
+//                                     navigation={navigation}
+//                                 />);
+//                         }}
+//                         keyExtractor={(item, index) => index.toString()}
+//                         />
+//                     </View>
+                    
+                    
+//                 </View>
+                
+//             )}
+//         </AuthContext.Consumer>
+//     );
+// }
+
+
+
+// export default NotificationScreen;

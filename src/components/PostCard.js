@@ -89,7 +89,7 @@ const PostCard = (props) => {
             />
             <Button type="outline" title={"Comment (" + postComments.length + ")"} onPress={
               function () {
-                props.navigation.navigate("PostScreen", props.post);
+                props.navigation.navigate("IndividualPost", props.post);
               }
             } />
           </View>

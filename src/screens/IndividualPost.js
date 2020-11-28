@@ -7,6 +7,7 @@ import { Entypo } from "@expo/vector-icons";
 import { storeDataJSON, addDataJSON, getDataJSON } from './../functions/AsyncStorageFunctions';
 import CommentCard from "../components/CommentCard";
 import moment from "moment";
+import PostCard from "./../components/PostCard";
 
 const IndividualPostScreen = (props) => {
     let info = props.route.params;
@@ -28,17 +29,6 @@ const IndividualPostScreen = (props) => {
             setPostComments([]);
         }
     };
-
-    // const loadLikes = async () => {
-    //     setLoading(true);
-    //     let likes = await getDataJSON('Likes');
-    //     setLikes(likes);
-    //     if (likes != null) {
-    //         setLikes(likes == likes.length);
-    //     } else {
-    //         likes== 0;
-    //     }
-    // };
 
     useEffect(() => {
         loadComments();
@@ -92,7 +82,7 @@ const IndividualPostScreen = (props) => {
                             {info.body}
                         </Text>
                     </Card>
-                    <Text style={styles.textstyle}>0 Likes, {postComments.length} Comments.</Text>
+                    <Text style={styles.textstyle}> Likes, {postComments.length} Comments</Text>
 
                     <Card.Divider />
                     <Input

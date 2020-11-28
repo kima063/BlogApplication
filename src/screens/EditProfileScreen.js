@@ -63,23 +63,23 @@ const EditProfileScreen = (props) => {
           format="DD-MM-YYYY"
           minDate="01-01-1950"
           maxDate="01-01-2025"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              //display: 'none',
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0,
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(date) => {
-            setDate(date);
-          }}
+          // confirmBtnText="Confirm"
+          // cancelBtnText="Cancel"
+          // customStyles={{
+          //   dateIcon: {
+          //     //display: 'none',
+          //     position: 'absolute',
+          //     left: 0,
+          //     top: 4,
+          //     marginLeft: 0,
+          //   },
+          //   dateInput: {
+          //     marginLeft: 36,
+          //   },
+          // }}
+          // onDateChange={(date) => {
+          //   setDate(date);
+          // }}
         />
 
         <TextInput

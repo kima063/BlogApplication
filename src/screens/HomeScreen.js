@@ -18,10 +18,11 @@ import PostCard from "./../components/PostCard";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNetInfo } from "@react-native-community/netinfo";
-import { addPostJSON, getDataJSON, storeDataJSON , addDataJSON } from "./../functions/AsyncStorageFunctions";
+import { addPostJSON, getDataJSON, storeDataJSON , addDataJSON, removeData } from "./../functions/AsyncStorageFunctions";
 import moment from "moment";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TouchableOpacity } from "react-native-gesture-handler";
 const input = React.createRef();
 
 const HomeScreen = (props) => {
@@ -34,6 +35,11 @@ const HomeScreen = (props) => {
     setPosts(temp_posts);
     setLoading(false);
   };
+
+  deleteItemById = id => {
+    const filteredData = AllPost.filter(item=> item.post_ID != ID);
+    return filteredData;
+  }
   // clearAsyncStorage = async() =>{
   //   AsyncStorage.clear();}
 
@@ -121,13 +127,30 @@ const HomeScreen = (props) => {
               keyExtractor={(item) => item.post_ID}
               renderItem={function ({ item }) {
                 return (
-                    <PostCard
+                  <TouchableOpacity onLongPress= {async ()=>{
+                    setLoading(true);
+                    if (AllPost.length == 1){
+                      removeData("Posts");
+                      setAllPost([]);
+                    }
+                    else{
+                      setAllPost(deleteItemById(item.post_ID));
+                      storeDataJSON([AllPost]);
+                    }
+                    setLoading(false);
+                  }}>
+                      <PostCard
                       author={item.author}
+                      author_id = {item.author_id}
                       title={item.created_at}
                       body={item.body}
                       navigation={props.navigation}
                       post={item}
+                      post_ID ={item.post_ID}
                      />
+
+                  </TouchableOpacity>
+
                 );
               }}
             />

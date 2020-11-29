@@ -1,14 +1,14 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import ProfieScreenStack from "./ProfileStack";
 import HomeScreenStack from "./HomeStack";
+import ProfileScreen from "../screens/ProfileScreen";
 const AppDrawer = createDrawerNavigator();
 
 const AppDrawerScreen = () => {
   return (
     <AppDrawer.Navigator>
       <AppDrawer.Screen name="HomeTab" component={HomeScreenStack} options={{ headerShown: false }} />
-      <AppDrawer.Screen name="Profile" component={ProfieScreenStack} options={{ headerShown: false }} />
+      <AppDrawer.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
     </AppDrawer.Navigator>
   );
 };

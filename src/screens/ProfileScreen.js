@@ -4,8 +4,9 @@ import {AsyncStorage} from "@react-native-async-storage/async-storage";
 import { Text, Card, Button, Avatar, Header } from "react-native-elements";
 import { AuthContext } from "./../providers/AuthProvider";
 import { removeData } from "./../functions/AsyncStorageFunctions";
+import { FontAwesome, Feather, AntDesign } from "@expo/vector-icons";
+import UploadPhoto from "../components/UploadPhoto";
 const ProfileScreen = (props) => {
-  const [Profile, setProfile] = useState({});
   return (
     <AuthContext.Consumer>
       {(auth) => (
@@ -29,41 +30,29 @@ const ProfileScreen = (props) => {
             }}
           />
           
-          <Avatar
-          containerStyle={styles.avatarStyle}
-          rounded
-          source=
-                  {require('./../../assets/pujo_white.jpg')}
-          size={200}
-          // onAccessoryPress={() => Alert.alert("change avatar")}
-          overlayContainerStyle={{ backgroundColor: "#1C1C1C" }}
-          showAccessory
-          accessory={{ containerStyle: { backgroundColor: "#1C1C1C" } }}
-        />
-          <View style={styles.viewStyle}>
-          {/* <UploadPhoto props={props} /> */}
+          <View>
+              <UploadPhoto props={props} />
+            </View>
 
-          </View>
-        <Text style={styles.textStyle}>Name :{auth.CurrentUser.name}</Text>
-        <Text style={styles.textStyle}>S_ID :{auth.CurrentUser.sid}</Text>
+            <Text style={styles.NameStyle}>
+              {auth.CurrentUser.name}
+            </Text>
+
+        {/* <Text style={styles.textStyle}>Name :{auth.CurrentUser.name}</Text> */}
+        {/* <Text style={styles.textStyle}>Student ID :{auth.CurrentUser.sid}</Text>
         <Text style={styles.textStyle}>Email :{auth.CurrentUser.email}</Text>
-        <Text style={styles.textStyle}>Password :{auth.CurrentUser.password}</Text>
-        <Text style={styles.textStyle}>Born On :{auth.CurrentUser.BornOn}</Text>
-        <Text style={styles.textStyle}>Address :{auth.CurrentUser.Address}</Text>
-        <Text style={styles.textStyle}>Works At :{auth.CurrentUser.Works_At}</Text>
+        <Text style={styles.textStyle}>Password :{auth.CurrentUser.password}</Text> */}
+        <Text style={styles.textStyle}>Born On :{auth.CurrentUser.bornOn}</Text>
+        <Text style={styles.textStyle}>Address :{auth.CurrentUser.address}</Text>
+        <Text style={styles.textStyle}>Works At :{auth.CurrentUser.worksAt}</Text>
         <View style={styles.viewStyle}>    
-        <Button 
-        title="Edit Profile"
-        type="solid"
-          onPress={function () {
-            props.navigation.navigate("Edit");
-            }}
-        />
         </View>
 
         <View style={styles.viewStyle}>
         <Button
+        icon={<AntDesign name="login" size={24} color="dodgerblue" />}
               title={' Delete Profile '}
+              type="solid"
               onPress={function () {
                 let key = auth.CurrentUser.email;
                 removeData(key);
@@ -87,14 +76,21 @@ const styles = StyleSheet.create({
     color: "black",
   },
   viewStyle: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
 
   },
+  ButtonStyle:{
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal:50
 
-  avatarStyle: {
-    margin: 30,
-    alignSelf: "center",
-
-
+  },
+  NameStyle:{
+    fontSize: 30,
+    color: "black",
+    justifyContent: "center",
 
   }
 });

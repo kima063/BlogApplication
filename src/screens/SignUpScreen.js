@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Input, Button, Card } from "react-native-elements";
-import { FontAwesome, Feather, AntDesign, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Feather, AntDesign, Ionicons, MaterialIcons  } from "@expo/vector-icons";
 import { storeDataJSON } from "../functions/AsyncStorageFunctions";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const SignUpScreen = (props) => {
   const [Name, setName] = useState("");
   const [SID, setSID] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+  const [BornOn , setBornOn] = useState("");
+  const [Address, setAddress] = useState("");
+  const [Works_At, setWorksAt] = useState("");
   return (
     <View style={styles.viewStyle}>
       <Card>
@@ -46,6 +51,57 @@ const SignUpScreen = (props) => {
           }}
         />
 
+
+        <Input
+          leftIcon={<MaterialIcons name="place" size={24} color="black" />}
+          placeholder='Address'
+          onChangeText={
+              function (currentInput) {
+                  setAddress(currentInput);
+          }
+            }
+        />
+
+                <Input
+                    leftIcon={<MaterialIcons name="work" size={24} color="black" />}
+                    placeholder='Works At'
+                    onChangeText={
+                        function (currentInput) {
+                          setWorksAt(currentInput);
+                        }
+                    }
+                    />
+
+          <View>
+          <View style={styles.viewStyle2}>
+
+              <Button icon={<MaterialIcons name="date-range" size={24} color="black" />}
+                  style={styles.buttonStyle2} type="outline" color='blue' onPress={
+                      function () {
+                          setShow(true)
+                      }} title="  Select Your BirthDate" />
+          </View>
+          {show && (
+              <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode="date"
+                  display="calendar"
+                  onChange={function (event, selectedDate) {
+                  setShow(false);
+                  setDate(selectedDate);
+                  let str = selectedDate.toString();
+                  str = str.slice(4, 16)
+                  alert(str);
+                  setBornOn(str);
+                  }
+                  }
+              />
+          )}
+          </View>
+
+
+
         <Button
           icon={<AntDesign name="user" size={24} color="white" />}
           title="  Sign Up!"
@@ -56,9 +112,9 @@ const SignUpScreen = (props) => {
               sid: SID,
               email: Email,
               password: Password,
-              BornOn: "Not Set Yet",
-              Address: "Not Set Yet",
-              WorksAt: "Not Set Yet",
+              bornOn: BornOn,
+              address: Address,
+              worksAt: Works_At,
             };
             
             storeDataJSON(Email, currentUser);
@@ -84,5 +140,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#4bacb8",
   },
+  viewStyle2: {
+    justifyContent: 'flex-start',
+    margin: 10,
+    paddingBottom: 10
+},
 });
 export default SignUpScreen;

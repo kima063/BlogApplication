@@ -153,7 +153,7 @@ const IndividualPostScreen = (props) => {
 
                     
                     <FlatList
-                        data={postComments.reverse()}
+                        data={postComments}
                         scrollsToTop={true}
                         keyExtractor={(item) => item.comment_ID}
                         renderItem={function ({ item }) {

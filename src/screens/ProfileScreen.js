@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, StyleSheet} from "react-native";
-import {AsyncStorage} from "@react-native-async-storage/async-storage";
 import { Text, Card, Button, Avatar, Header } from "react-native-elements";
 import { AuthContext } from "./../providers/AuthProvider";
 import { removeData } from "./../functions/AsyncStorageFunctions";
@@ -38,15 +37,20 @@ const ProfileScreen = (props) => {
               {auth.CurrentUser.name}
             </Text>
 
-        {/* <Text style={styles.textStyle}>Name :{auth.CurrentUser.name}</Text> */}
-        {/* <Text style={styles.textStyle}>Student ID :{auth.CurrentUser.sid}</Text>
-        <Text style={styles.textStyle}>Email :{auth.CurrentUser.email}</Text>
-        <Text style={styles.textStyle}>Password :{auth.CurrentUser.password}</Text> */}
-        <Text style={styles.textStyle}>Born On :{auth.CurrentUser.bornOn}</Text>
-        <Text style={styles.textStyle}>Address :{auth.CurrentUser.address}</Text>
-        <Text style={styles.textStyle}>Works At :{auth.CurrentUser.worksAt}</Text>
-        <View style={styles.viewStyle}>    
-        </View>
+        <View style={styles.viewStyle2}>
+        <View style={styles.perViewStyle2}>
+              <MaterialIcons name="place" size={30} color="#777777" />
+              <Text style={{ fontSize: 24, color: "#777777", marginLeft: 20 }}>{auth.CurrentUser.address}</Text>
+            </View>
+            <View style={styles.perViewStyle2}>
+              <MaterialIcons name="date-range" size={30} color="#777777" />
+              <Text style={{ fontSize: 24, color: "#777777", marginLeft: 20 }}>{auth.CurrentUser.bornOn}</Text>
+            </View>
+            <View style={styles.perViewStyle2}>
+              <MaterialIcons name="work" size={30} color="#777777" />
+              <Text style={{ fontSize: 24, color: "#777777", marginLeft: 20 }}>{auth.CurrentUser.worksAt}</Text>
+            </View>
+          </View>
 
         <View style={styles.viewStyle}>
         <Button
@@ -74,6 +78,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 20,
     color: "black",
+
   },
   viewStyle: {
     flex: 1,
@@ -88,10 +93,22 @@ const styles = StyleSheet.create({
 
   },
   NameStyle:{
+    padding: 20,
     fontSize: 30,
-    color: "black",
-    justifyContent: "center",
+    color: "#162f3e",
+    fontStyle: 'normal'
 
-  }
+  },
+  perViewStyle2: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    margin: 10,
+    padding: 10
+  },
+  viewStyle2: {
+    paddingTop: 20,
+    paddingHorizontal: 30,
+    marginBottom: 25,
+  },
 });
 export default ProfileScreen;

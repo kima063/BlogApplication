@@ -10,7 +10,7 @@ const SignUpScreen = (props) => {
   const [SID, setSID] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date(1700420630000));
   const [show, setShow] = useState(false);
   const [BornOn , setBornOn] = useState("");
   const [Address, setAddress] = useState("");

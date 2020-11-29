@@ -74,7 +74,7 @@ const removeData = async (key) => {
     await AsyncStorage.removeItem(key);
     alert("Deleted!");
   } catch (error) {
-    alert("Deleted!");
+    alert(error);
   }
 };
 

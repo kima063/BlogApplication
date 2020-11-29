@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { Card, Button, Text, Avatar } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons,MaterialCommunityIcons } from "@expo/vector-icons";
 import { AuthContext } from "./../providers/AuthProvider";
 import { storeDataJSON, addDataJSON, getDataJSON, removeData } from './../functions/AsyncStorageFunctions';
 
@@ -9,6 +9,8 @@ const PostCard = (props) => {
   const [postComments, setPostComments] = useState([]);
   const [postLike, setPostLike] = useState([]);
   const [allLike, setallLike] = useState([]);
+  const [allComments, setallComments] = useState([]);
+  const [loading, setLoading] = useState(false);
   const loadLikes = async () => {
     let likes = await getDataJSON('Likes');
     if (likes != null) {
@@ -90,6 +92,14 @@ const PostCard = (props) => {
             <Button type="outline" title={"Comment (" + postComments.length + ")"} onPress={
               function () {
                 props.navigation.navigate("IndividualPost", props.post);
+                      setLoading(true);
+                      let flag = 0;
+                      if (allComments == undefined) {
+                          flag = 1;
+                      }
+                      else {
+                          flag = allComments.length + 1;
+                      }
               }
             } />
           </View>

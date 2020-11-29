@@ -39,7 +39,7 @@ const NotificationScreen = (props) => {
                 activeOpacity={1}
               />
               <Text style={{ paddingHorizontal: 10 }}>
-                Pam Beesley Liked Your Post.
+                Naj Liked Your Post.
               </Text>
             </View>
           </Card>

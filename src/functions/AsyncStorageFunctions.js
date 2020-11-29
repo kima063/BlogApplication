@@ -18,7 +18,7 @@ const addDataJSON = async (key, value) => {
     val.push(value);
     const jsonValue = JSON.stringify(val);
     await AsyncStorage.setItem(key, jsonValue);
-    //alert("Post Added Succesfully.")
+    alert("Added Succesfully.")
   } catch (error) {
     //alert(error);
   }
@@ -65,7 +65,7 @@ const getDataJSON = async (key) => {
       //alert("");
     }
   } catch (error) {
-    //alert(error);
+    alert(error);
   }
 };
 
@@ -74,7 +74,7 @@ const removeData = async (key) => {
     await AsyncStorage.removeItem(key);
     alert("Deleted!");
   } catch (error) {
-    alert(error);
+    alert("Deleted!");
   }
 };
 

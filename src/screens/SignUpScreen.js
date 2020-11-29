@@ -92,7 +92,6 @@ const SignUpScreen = (props) => {
                   setDate(selectedDate);
                   let str = selectedDate.toString();
                   str = str.slice(4, 16)
-                  alert(str);
                   setBornOn(str);
                   }
                   }

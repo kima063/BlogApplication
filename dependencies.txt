@@ -5,3 +5,4 @@ npm install @react-navigation/drawer
 npm install react-native-elements
 npm install @react-native-async-storage/async-storage
 npm i react-native-modal-datetime-picker @react-native-community/datetimepicker
+npm install material-design-icons

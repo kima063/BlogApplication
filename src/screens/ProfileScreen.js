@@ -3,7 +3,7 @@ import { View, StyleSheet} from "react-native";
 import { Text, Card, Button, Avatar, Header } from "react-native-elements";
 import { AuthContext } from "./../providers/AuthProvider";
 import { removeData } from "./../functions/AsyncStorageFunctions";
-import { FontAwesome, Feather, AntDesign } from "@expo/vector-icons";
+import { FontAwesome, Feather, AntDesign,MaterialIcons , MaterialCommunityIcons } from "@expo/vector-icons";
 import UploadPhoto from "../components/UploadPhoto";
 const ProfileScreen = (props) => {
   return (
@@ -33,9 +33,11 @@ const ProfileScreen = (props) => {
               <UploadPhoto props={props} />
             </View>
 
+            <View style={styles.viewStyle2}>
             <Text style={styles.NameStyle}>
               {auth.CurrentUser.name}
             </Text>
+            </View>
 
         <View style={styles.viewStyle2}>
         <View style={styles.perViewStyle2}>
@@ -54,7 +56,7 @@ const ProfileScreen = (props) => {
 
         <View style={styles.viewStyle}>
         <Button
-        icon={<AntDesign name="login" size={24} color="dodgerblue" />}
+        icon={<AntDesign name="delete" size={24} color="dodgerblue" />}
               title={' Delete Profile '}
               type="solid"
               onPress={function () {
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
 
   },
   NameStyle:{
-    padding: 20,
+    padding: 30,
     fontSize: 30,
     color: "#162f3e",
     fontStyle: 'normal'

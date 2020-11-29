@@ -4,9 +4,10 @@ import { Card, Button, Text, Avatar, ActivityIndicator, Input, Header, SafeAreaV
 import {FlatList} from "react-native";
 import { AuthContext } from "../providers/AuthProvider";
 import { Entypo } from "@expo/vector-icons";
-import { storeDataJSON, addDataJSON, getDataJSON } from './../functions/AsyncStorageFunctions';
+import { storeDataJSON, addDataJSON, getDataJSON, removeData } from './../functions/AsyncStorageFunctions';
 import CommentCard from "../components/CommentCard";
 import moment from "moment";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const IndividualPostScreen = (props) => {
     let info = props.route.params;
@@ -40,6 +41,11 @@ const IndividualPostScreen = (props) => {
         }
       };
     
+
+    deleteItemById = id => {
+        const filteredComment = allComments.filter(item=> item.post_ID !=id);
+        return filteredComment;
+    }
 
     useEffect(() => {
         loadComments();
@@ -158,11 +164,24 @@ const IndividualPostScreen = (props) => {
                         keyExtractor={(item) => item.comment_ID}
                         renderItem={function ({ item }) {
                             return (
+                                <TouchableOpacity onLongPress= {async ()=>{
+                                    setLoading(true);
+                                    if (allComments.length == 1){
+                                      removeData("Comments");
+                                      setallComments([]);
+                                    }
+                                    else{
+                                        setallComments(deleteItemById(item.post_ID));
+                                      storeDataJSON([allComments]);
+                                    }
+                                    setLoading(false);
+                                  }}>
                                 <CommentCard
                                     author={item.author}
                                     time={item.time}
                                     body={item.body}
                                 />
+                                </TouchableOpacity>
                             );
                         }}
                     />
